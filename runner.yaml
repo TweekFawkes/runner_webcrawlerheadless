@@ -20,10 +20,10 @@ build:
     echo "END: Building the runner"
 
 webform:
-  - name: url
-    prompt: URL
+  - name: url_to_crawl
+    prompt: URL to Crawl
     type: text
 
 launch:
   type: binary
-  command: katana -u ${url} -headless -system-chrome -no-sandbox -headless-options --disable-gpu,--no-sandbox,--single-process,--no-zygote,--disable-setuid-sandbox,--disable-dev-shm-usage
+  command: katana -u ${url_to_crawl} -headless -system-chrome -no-sandbox -headless-options --disable-gpu,--no-sandbox,--single-process,--no-zygote,--disable-setuid-sandbox,--disable-dev-shm-usage
