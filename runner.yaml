@@ -1,6 +1,6 @@
 runner:
   name: Web Crawler Headless
-  description: Web Crawling and Spidering with headless hybrid crawling enabled. Headless mode hooks internal headless calls to handle HTTP requests/responses directly within the browser context. This offers two advantages: 1. The HTTP fingerprint (TLS and user agent) fully identify the client as a legitimate browser. 2. Better coverage since the endpoints are discovered analyzing the standard raw response, as in the previous modality, and also the browser-rendered one with javascript enabled.
+  description: Web Crawling and Spidering with headless hybrid crawling enabled. Headless mode hooks internal headless calls to handle HTTP requests/responses directly within the browser context. This offers two advantages... 1. The HTTP fingerprint (TLS and user agent) fully identify the client as a legitimate browser. 2. Better coverage since the endpoints are discovered analyzing the standard raw response, as in the previous modality, and also the browser-rendered one with javascript enabled.
   version: 0.0.1
 
 build:
