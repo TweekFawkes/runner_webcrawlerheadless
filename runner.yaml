@@ -6,17 +6,25 @@ runner:
 build:
   commands: |
     echo "START: Building the runner"
-    apt install -y wget
+    apt install -y curl
+    apt install -y ca-certificates
+    apt install -y chromium-browser
     apt install -y gnupg2
     apt install -y software-properties-common
     apt install -y apt-transport-https
-    apt install -y ca-certificates
+    apt install -y build-essential
     wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && apt update && apt install -y google-chrome-stable
     wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz && rm go1.21.6.linux-amd64.tar.gz
+    ENV GOROOT=/usr/local/go
+    ENV GOPATH=/go
+    ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    ENV CGO_ENABLED=1
     mkdir -p /go/src
     mkdir -p /go/bin
-    export PATH=/go/bin:/usr/local/go/bin:$PATH
-    go install github.com/projectdiscovery/katana/cmd/katana@latest
+    cd /tmp && git clone https://github.com/projectdiscovery/katana.git
+    cd /tmp/katana && sed -i 's|Mozilla\/5\.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit\/537\.36 (KHTML, like Gecko) Chrome\/87\.0\.4280\.88 Safari\/537\.36|CCBot\/2\.0 (http:\/\/commoncrawl\.org\/faq\/)|g' /tmp/katana/pkg/utils/utils.go
+    cd /tmp/katana && go mod download
+    cd /tmp/katana && go install ./cmd/katana
     echo "END: Building the runner"
 
 webform:
